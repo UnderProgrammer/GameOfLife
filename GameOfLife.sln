@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameEngine", "GameEngine\Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameOfLifeConsole", "ConsoleRender\GameOfLifeConsole.csproj", "{D064BAA5-6D67-45BA-B650-97AB4308E185}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteableBitmapRenderer", "WriteableBitmapRenderer\WriteableBitmapRenderer.csproj", "{9E771581-C58E-45ED-A87B-97D02ADE9E2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D064BAA5-6D67-45BA-B650-97AB4308E185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D064BAA5-6D67-45BA-B650-97AB4308E185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D064BAA5-6D67-45BA-B650-97AB4308E185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E771581-C58E-45ED-A87B-97D02ADE9E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E771581-C58E-45ED-A87B-97D02ADE9E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E771581-C58E-45ED-A87B-97D02ADE9E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E771581-C58E-45ED-A87B-97D02ADE9E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
