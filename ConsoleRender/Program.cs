@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Threading;
 using GameEngine;
 
@@ -30,7 +31,7 @@ namespace ConsoleApp12
                 for (int x = 0; x < gameField.Width; x++)
                 {
                     //Первая итерация цикла: 
-                    if (gameField.GetCell(x, y).IsAlive)
+                    if (gameField.GetCell(x, y) == 1)
                     {
                         Console.Write("O");
                     }

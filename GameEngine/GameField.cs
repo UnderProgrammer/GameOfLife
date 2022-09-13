@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GameEngine
 {
@@ -8,18 +9,18 @@ namespace GameEngine
         {
             Width = width;
             Height = height;
-            Field = new Cell[Width, Height];
+            Field = new byte[Height * Width];
             Initialize();
         }
         public int Width { get; set; } = 120;
         public int Height { get; set; } = 30;
-        public ICell[,] Field { get; set; }
+        public byte[] Field { get; set; }
         Random _rnd = new Random();
 
 
         private bool TrueOrFalse()
         {
-            if(_rnd.Next(0, 2) == 0)
+            if (_rnd.Next(0, 2) == 0)
             {
                 return false;
             }
@@ -27,39 +28,59 @@ namespace GameEngine
         }
         //реализовать метод для инициализации игрового поля случайными значениями (t/f) 
 
+        private int GetIndex(int x, int y) => y * Width + x;
+
         public void Initialize()
         {
-            for(int i = 0; i < Height; i++)
-            {
-                for(int j = 0; j < Width; j++)
-                {
-                    var position = new CellPosition { X = j, Y = i };
-                    var isalive = TrueOrFalse();
-                    Field[j, i] = new Cell(position, isalive, this); 
-                }
-            }
-
-        }
-
-        public ICell GetCell(int x, int y)
-        {
-            if (x < 0 || y < 0 || x >= Width || y >= Height)
-            {
-                return new Cell(new CellPosition(x, y), false, null);
-            }
-            return Field[x, y];
-        }
-        public IGameField NextGen()
-        {
-            var nextGen = new GameField(Width, Height);
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    nextGen.Field[x, y] = new Cell(new CellPosition(x, y), GetCell(x, y).IsAliveNextGen, nextGen);
+                    var i = GetIndex(x, y);
+                    Field[i] = (byte)_rnd.Next(0, 2);
                 }
             }
-            Field = nextGen.Field;
+
+        }
+
+        public byte GetCell(int x, int y)
+        {
+            return Field[GetIndex(x, y)];
+        }
+
+        private int CountNeighbors(int i)
+        {
+            var _n = Field.Length;
+            var ni = _n + i;
+            var prevStr = ni - Width;
+            var nextStr = ni + Width;
+            return (byte)(Field[(prevStr - 1) % _n]
+                          + Field[prevStr % _n]
+                          + Field[(prevStr + 1) % _n]
+                          + Field[(ni - 1) % _n]
+                          + Field[(ni + 1) % _n]
+                          + Field[(nextStr - 1) % _n]
+                          + Field[nextStr % _n]
+                          + Field[(nextStr + 1) % _n]);
+        }
+        //Записать живых на следущий ход соседей в Sup и перезаписать в Field, инициализировать метод NextGen
+        public IGameField NextGen()
+        {
+            var Sup = new byte[Height * Width];
+            for (byte i = 0; i < Field.Length; i++)
+            {
+                byte nbors = (byte)CountNeighbors(Field[i]);
+                var IsAlive = Field[i] == 1;
+                if (nbors == 2 && IsAlive || nbors == 3)
+                {
+                    Sup[i] = 1;
+                }
+                else
+                {
+                    Sup[i] = 0;
+                }
+            }
+            Field = Sup;
             return this;
         }
     }

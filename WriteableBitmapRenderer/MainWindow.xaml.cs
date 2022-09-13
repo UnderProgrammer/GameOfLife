@@ -62,7 +62,7 @@ namespace WriteableBitmapRenderer
             {
                 for (int x = 0; x < _buffer.Width; x++)
                 {
-                    if(gameField.GetCell(x, y).IsAlive)
+                    if(gameField.GetCell(x, y) == 1)
                     {
                         _buffer.SetPixel(x, y, Colors.Gray);
                     }
