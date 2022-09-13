@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/GameOfLife/FileContentIndex/494a768c-4ff1-450b-8ff2-4b7052544906.vsidx
+/.vs/*
+/ConsoleRender/bin/Debug/netcoreapp3.1
+/ConsoleRender/obj/Debug/netcoreapp3.1
+/ConsoleRender/obj
+/GameEngine/bin/Debug/netcoreapp3.1
+/GameEngine/obj/Debug/netcoreapp3.1
+/GameEngine/obj
+*.dll
+*.obj
+*.cache
+/obj/*
+/WriteableBitmapRenderer/obj
+/WriteableBitmapRenderer/bin/Debug/netcoreapp3.1
+/GameOfLife.sln.DotSettings.user

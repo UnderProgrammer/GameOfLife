@@ -67,9 +67,9 @@ namespace GameEngine
         public IGameField NextGen()
         {
             var Sup = new byte[Height * Width];
-            for (byte i = 0; i < Field.Length; i++)
+            for (int i = 0; i < Field.Length; i++)
             {
-                byte nbors = (byte)CountNeighbors(Field[i]);
+                byte nbors = (byte)CountNeighbors(i);
                 var IsAlive = Field[i] == 1;
                 if (nbors == 2 && IsAlive || nbors == 3)
                 {
