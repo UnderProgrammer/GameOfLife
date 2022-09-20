@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
@@ -14,12 +16,15 @@ namespace WriteableBitmapRenderer
         public int _width = 100;
         public int _heigth = 100;
         private readonly WriteableBitmap _buffer;
+        private readonly Stopwatch _stopwatch = new Stopwatch();
         public MainWindow()
         {
             _field = new GameField(_width, _heigth);
             _field.Initialize();
-            _buffer = BitmapFactory.New(_width, _heigth);
+            var palette = new BitmapPalette(new List<Color> {Colors.Black, Colors.Crimson});
+            _buffer = new WriteableBitmap(_width, _heigth, 1, 1, PixelFormats.Indexed8, palette);
             _game = new WriteableBitmapGame(_buffer);
+            _stopwatch.Start();
             InitializeComponent();
         }
 
@@ -29,13 +34,19 @@ namespace WriteableBitmapRenderer
             CompositionTarget.Rendering += Rendering;
         }
 
+
+        // todo: convert target frame time value to target fps. Introduce a class field `_fps`
         private void Rendering(object? sender, EventArgs e)
         {
-            _game.Draw(_field);
-            Thread.Sleep(TimeSpan.FromMilliseconds(500));
-            _field.NextGen();
+            if (_stopwatch.ElapsedMilliseconds > 50)
+            {
+                _game.Draw(_field);
+                _field.NextGen();
+                _stopwatch.Restart();
+            }
         }
     }
+
     /// <summary>
     /// Посмотреть что такое WriteableBitmap, как отрисовывать изображение с помощью SetPixel, имплементировать метод Draw, 
     /// </summary>
@@ -50,21 +61,7 @@ namespace WriteableBitmapRenderer
 
         public void Draw(IGameField gameField)
         {
-            for (int y = 0; y < _buffer.Height; y++)
-            {
-                for (int x = 0; x < _buffer.Width; x++)
-                {
-                    if(gameField.GetCell(x, y) == 1)
-                    {
-                        _buffer.SetPixel(x, y, Colors.Gray);
-                    }
-                    else
-                    {
-                        _buffer.SetPixel(x, y, Colors.Black);
-                    }
-                   
-                }
-            }
+            _buffer.WritePixels(new Int32Rect(0, 0, _buffer.PixelWidth, _buffer.PixelHeight), gameField.Field, _buffer.PixelWidth, 0);
         }
     }
 }
