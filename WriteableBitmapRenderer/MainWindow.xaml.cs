@@ -17,6 +17,7 @@ namespace WriteableBitmapRenderer
         public int _heigth = 100;
         private readonly WriteableBitmap _buffer;
         private readonly Stopwatch _stopwatch = new Stopwatch();
+        private double _fps;
         public MainWindow()
         {
             _field = new GameField(_width, _heigth);
@@ -40,6 +41,7 @@ namespace WriteableBitmapRenderer
         {
             if (_stopwatch.ElapsedMilliseconds > 50)
             {
+                _fps = 1000 / _stopwatch.ElapsedMilliseconds;
                 _game.Draw(_field);
                 _field.NextGen();
                 _stopwatch.Restart();
@@ -47,9 +49,6 @@ namespace WriteableBitmapRenderer
         }
     }
 
-    /// <summary>
-    /// Посмотреть что такое WriteableBitmap, как отрисовывать изображение с помощью SetPixel, имплементировать метод Draw, 
-    /// </summary>
     public class WriteableBitmapGame : IGame
     {
         private readonly WriteableBitmap _buffer;
@@ -65,4 +64,5 @@ namespace WriteableBitmapRenderer
         }
     }
 }
+
 
