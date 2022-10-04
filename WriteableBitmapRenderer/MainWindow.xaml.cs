@@ -17,7 +17,7 @@ namespace WriteableBitmapRenderer
         public int _heigth = 100;
         private readonly WriteableBitmap _buffer;
         private readonly Stopwatch _stopwatch = new Stopwatch();
-        private double _fps;
+        private double _fps = 60;
         public MainWindow()
         {
             _field = new GameField(_width, _heigth);
@@ -39,9 +39,9 @@ namespace WriteableBitmapRenderer
         // todo: convert target frame time value to target fps. Introduce a class field `_fps`
         private void Rendering(object? sender, EventArgs e)
         {
-            if (_stopwatch.ElapsedMilliseconds > 50)
+            var targetFps = 1000 / _fps;
+            if (_stopwatch.ElapsedMilliseconds > targetFps)
             {
-                _fps = 1000 / _stopwatch.ElapsedMilliseconds;
                 _game.Draw(_field);
                 _field.NextGen();
                 _stopwatch.Restart();
