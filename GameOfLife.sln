@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameEngine", "GameEngine\GameEngine.csproj", "{59EBF619-9775-471D-A570-5350F3361900}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameOfLifeConsole", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WriteableBitmapRenderer", "WriteableBitmapRenderer\WriteableBitmapRenderer.csproj", "{9E771581-C58E-45ED-A87B-97D02ADE9E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Balls", "Balls\Balls.csproj", "{C73030D3-CD7A-428D-A929-D91F211C2B2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Balls", "Balls\Balls.csproj", "{C73030D3-CD7A-428D-A929-D91F211C2B2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1DC5CFBD-0349-4C46-AE03-0C4F9E9FCE2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C73030D3-CD7A-428D-A929-D91F211C2B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C73030D3-CD7A-428D-A929-D91F211C2B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C73030D3-CD7A-428D-A929-D91F211C2B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC5CFBD-0349-4C46-AE03-0C4F9E9FCE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC5CFBD-0349-4C46-AE03-0C4F9E9FCE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC5CFBD-0349-4C46-AE03-0C4F9E9FCE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC5CFBD-0349-4C46-AE03-0C4F9E9FCE2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

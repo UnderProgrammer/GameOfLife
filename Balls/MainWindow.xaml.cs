@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Balls
 {
@@ -64,57 +54,6 @@ namespace Balls
             foreach (var ball in _balls)
             {
                 ball.Move();
-            }
-        }
-    }
-
-    public class Ball
-    {
-        private readonly WriteableBitmap _buffer;
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int R { get; set; }
-        public decimal Vx { get; set; }
-        public decimal Vy { get; set; }
-        public Color Color { get; set; }
-
-        public Ball(int x, int y, int r, decimal vx, decimal vy, Color color, WriteableBitmap buffer)
-        {
-            X = x;
-            Y = y;
-            R = r;
-            Vx = vx;
-            Vy = vy;
-            Color = color;
-            _buffer = buffer;
-        }
-
-        public void Draw()
-        {
-            var x1 = X - R;
-            var y1 = Y - R;
-            var x2 = X + R;
-            var y2 = Y + R;
-            _buffer.FillEllipse(x1, y1, x2, y2, Color);
-        }
-
-        public void Move()
-        {
-            Draw();
-            X = (int) (X + Vx);
-            Y = (int) (Y + Vy);
-            Collision();
-        }
-
-        private void Collision()
-        {
-            if (X + R >= _buffer.PixelWidth || X - R <= 0)
-            {
-                Vx = - Vx;
-            }
-            if (Y + R >= _buffer.PixelHeight || Y - R <= 0)
-            {
-                Vy = -Vy;
             }
         }
     }
