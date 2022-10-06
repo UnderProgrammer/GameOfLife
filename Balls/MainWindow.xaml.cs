@@ -23,37 +23,33 @@ namespace Balls
         public int _width = 500;
         public int _heigth = 500;
         private readonly WriteableBitmap _buffer;
-        private int _posx;
-        private int _posy; 
-        private int _rad;
-        private decimal _randvx; 
-        private decimal _randvy;
-        private int _randcolr;
-
-        //private int _dy;
-        //дз: сделать, чтобы, дойдя до края, шарики меняли своё направление
-        //1. найти левую и правую границу шариков
-        //2. сравнить границы шариков и 0 или _width
-        //дз: сделать генератор шариков
+        private Random _randomSeed = new Random();
+        private Ball[] _balls;
+        //дз: метод generate должен возвращать массив
         public MainWindow()
         {
             _buffer = BitmapFactory.New(_width, _heigth);
+            _balls = GenerateBalls(50);
             InitializeComponent();
         }
 
-        private void GenerateBall()
+        private Ball[] GenerateBalls(int count)
         {
-            for (int i = 0; i < 50; i++)
+            Ball[] ball = new Ball[count];
+            for (int i = 0; i < ball.Length; i++)
             {
-                _posx = new Random().Next(0, _width);
-                _posy = new Random().Next(0, _heigth);
-                _rad = new Random().Next(0, 30);
-                _randvx = new Random().Next(-3, 3);
-                _randvy = new Random().Next(-3, 3);
-                _randcolr = new Random().Next(0, 256);
-                Ball ball = new Ball(_posx, _posy, _rad, _randvx, _randvy, Color.FromRgb((byte)_randcolr, (byte)_randcolr, (byte)_randcolr), _buffer);
-                ball.Move();
+                int r = _randomSeed.Next(0, 30);
+                int posx = _randomSeed.Next(r, _width - r);
+                int posy = _randomSeed.Next(r, _heigth - r);
+                decimal vx = _randomSeed.Next(1, 5);
+                decimal vy = _randomSeed.Next(1, 5);
+                var rd = _randomSeed.Next(0, 256);
+                var grn = _randomSeed.Next(0, 256);
+                var bl = _randomSeed.Next(0, 256);
+                ball[i] = new Ball(posx, posy, r, vx, vy, Color.FromRgb((byte)rd, (byte)grn, (byte)bl), _buffer);
             }
+
+            return ball;
         }
 
         private void ViewPort_OnLoaded(object sender, RoutedEventArgs e)
@@ -65,7 +61,10 @@ namespace Balls
         private void Rendering(object sender, EventArgs e)
         {
             _buffer.FillRectangle(0, 0, _width, _heigth, Colors.Black);
-            GenerateBall();
+            foreach (var ball in _balls)
+            {
+                ball.Move();
+            }
         }
     }
 
