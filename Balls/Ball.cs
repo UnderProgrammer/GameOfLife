@@ -20,7 +20,7 @@ namespace Balls
             X = x;
             Y = y;
             R = r;
-            Speed = new Vector2d((double)vx, (double)vy);
+            Speed = new Vector2d(vx, vy);
             Color = color;
             _buffer = buffer;
         }
