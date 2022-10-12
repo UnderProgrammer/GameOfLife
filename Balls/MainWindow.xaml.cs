@@ -10,8 +10,8 @@ namespace Balls
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int _width = 500;
-        public int _heigth = 500;
+        public int _width = 1024;
+        public int _heigth = 768;
         private readonly WriteableBitmap _buffer;
         private Random _randomSeed = new Random();
         private Ball[] _balls;
@@ -19,7 +19,7 @@ namespace Balls
         public MainWindow()
         {
             _buffer = BitmapFactory.New(_width, _heigth);
-            _balls = GenerateBalls(50);
+            _balls = GenerateBalls(15);
             InitializeComponent();
         }
 
@@ -28,7 +28,7 @@ namespace Balls
             Ball[] ball = new Ball[count];
             for (int i = 0; i < ball.Length; i++)
             {
-                int r = _randomSeed.Next(0, 30);
+                int r = _randomSeed.Next(5, 30);
                 int posx = _randomSeed.Next(r, _width - r);
                 int posy = _randomSeed.Next(r, _heigth - r);
                 decimal vx = _randomSeed.Next(1, 5);
@@ -53,7 +53,7 @@ namespace Balls
             _buffer.FillRectangle(0, 0, _width, _heigth, Colors.Black);
             foreach (var ball in _balls)
             {
-                ball.Move();
+                ball.Move(_balls);
             }
         }
     }

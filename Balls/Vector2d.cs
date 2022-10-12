@@ -71,14 +71,22 @@ namespace Balls
             return new Vector2d(x, y);
         }
 
-        public static (Vector2d kb, Vector2d kc) Decompose(Vector2d a, Vector2d b, Vector2d c)
+        public static (Vector2d bComponent, Vector2d cComponent) Decompose(Vector2d a, Vector2d b, Vector2d c)
         {
-            var k1 = (a.Y * b.X - a.X * b.Y) / (b.X * c.Y - b.Y * c.X);
-            var k2 = (a.X * c.Y - a.Y * c.X) / (b.X * c.Y - b.Y * c.X);
+            //simple optimization just not to calculate the same values twice
+            var tmp = b.X * c.Y - b.Y * c.X;
+           
+            var k1 = (a.Y * b.X - a.X * b.Y) / tmp;
+            var k2 = (a.X * c.Y - a.Y * c.X) / tmp;
 
-            var kb = k2 * b;
-            var kc = k1 * c;
-            return (kb, kc);
+            var bComponent = k2 * b;
+            var cComponent = k1 * c;
+            return (bComponent, cComponent);
+        }
+
+        public (Vector2d kb, Vector2d kc) Decompose(Vector2d b, Vector2d c)
+        {
+            return Decompose(this, b, c);
         }
 
         public bool Equals(Vector2d other)
